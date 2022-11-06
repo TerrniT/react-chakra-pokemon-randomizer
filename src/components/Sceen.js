@@ -1,14 +1,14 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Cat } from './Cat';
 import { Html, OrbitControls, useProgress } from '@react-three/drei';
+import { Bulbasaur } from './Bulbasaur';
 
 const Loader = () => {
   const { progress } = useProgress();
   return <Html center>{progress} %</Html>;
 };
 
-const Scene = () => {
+export const Scene = () => {
   return (
     <Canvas
       style={{
@@ -16,14 +16,12 @@ const Scene = () => {
         alignSelf: 'center',
         backgroundColor: 'transparentt',
       }}
-      camera={{ position: [5, 10, 10], zoom: 10 }}
+      camera={{ position: [100, 200, 200], zoom: 7 }}
     >
       <Suspense fallback={<Loader />}>
-        <pointLight position={[5, 5, 1]} />
-        <ambientLight intensity={0.55} />
-        <ambientLight intensity={0.2} />
-        <directionalLight intensity={0.4} />
-        <Cat />
+        <pointLight position={[5, 5, 1]} /> <ambientLight intensity={0.55} />{' '}
+        <ambientLight intensity={0.2} /> <directionalLight intensity={0.4} />{' '}
+        <Bulbasaur />
         <OrbitControls
           autoRotate
           enableZoom={false}
@@ -35,5 +33,4 @@ const Scene = () => {
     </Canvas>
   );
 };
-
 export default Scene;
