@@ -41,8 +41,11 @@ export const Pokemon = () => {
   };
 
   const fetchRandomPokemon = () => {
+    const controller = new AbortController();
     let random = Math.floor(Math.random() * 792);
-    fetch(`https://pokeapi.co/api/v2/pokemon/${random}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${random}`, {
+      signal: controller.signal,
+    })
       .then(async response => {
         const poke = await response.json();
         setId(poke.id);
@@ -51,7 +54,11 @@ export const Pokemon = () => {
         setTypes(poke.types[0].type.name);
       })
       .catch(err => console.log(err));
+    return () => {
+      controller.abort();
+    };
   };
+
   useEffect(() => {
     fetchRandomPokemon();
   }, []);
@@ -74,7 +81,7 @@ export const Pokemon = () => {
             rounded={'lg'}
             mt={-12}
             pos={'relative'}
-            height={'230px'}
+            height={'210px'}
             _after={{
               transition: 'all .3s ease',
               content: '""',
@@ -98,7 +105,7 @@ export const Pokemon = () => {
             ) : (
               <Image
                 rounded={'lg'}
-                height={280}
+                height={300}
                 width={282}
                 objectFit={'cover'}
                 src={image}
@@ -126,9 +133,7 @@ export const Pokemon = () => {
                 pl={4}
                 rounded={'lg'}
               >
-                <Text fontWeight={800} fontSize={'xl'}>
-                  {types}
-                </Text>
+                <Text fontWeight={800}>{types}</Text>
               </Box>
             </Stack>
           </Stack>

@@ -11,25 +11,24 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
-import { Pokemon, ProductSimple } from './components/Pokemon.js';
+import { Pokemon } from './components/Pokemon.js';
 import { Scene } from './components/Sceen.js';
 
 function App() {
   // Colormode style
-  const modes = useColorModeValue('purple.400', 'orange.300');
   const color = useColorModeValue('gray.800', 'white');
-  const scheme = useColorModeValue('purple', 'orange');
 
   return (
     <Box textAlign="center" fontSize="xl">
       <ColorModeSwitcher mt="5" />
       <Flex p={3} display="flex" flexDirection="column">
         <Scene />
-        <Heading justifySelf="flex-start" color={color} fontWeight="700">
-          Pokemon Generator
+        <Heading color={color} fontWeight="600">
+          Pokemon Randomizer
         </Heading>
         <Text>
           <Link
+            fontWeight="700"
             justifySelf="center"
             href="https://github.com/TerrniT"
             isExternal
@@ -37,8 +36,8 @@ function App() {
             @terrnit <ExternalLinkIcon justifySelf="center" mb={1} />
           </Link>
         </Text>
-        <Flex w="325px" h="100vh" alignSelf="center">
-          <Flex w="325px" flexDir="column">
+        <Flex alignSelf="center">
+          <Flex flexDir="row">
             <Pokemon />
           </Flex>
         </Flex>
